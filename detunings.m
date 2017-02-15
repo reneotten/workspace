@@ -1,10 +1,6 @@
 offset=0;
 
-epsilons=[-4:0.1:4]*1e-3;
-
-
-%compensation?
-
+epsilons=[0]*1e-3;
 
 count=0;
 for epsilon=epsilons
@@ -37,7 +33,7 @@ defaultArgs = struct(...
 	);
 
 [E,phi,dU]=dot_tune.capacitive_gate_model(defaultArgs);
-figure,imagesc(dU);
+figure,imagesc(dU); % add axis here
 hold on;
 colorbar;
 set(gca,'Ydir','normal');
