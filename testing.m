@@ -1,3 +1,27 @@
+%% standart, no ohmic, no stray dot
+wax=linspace(100e6*2*pi,300*1e6*2*pi,1001);
+Lax=linspace(400e-9,900e-9,101);
+[w,L]=meshgrid(wax,Lax);
+Rohmic=0;
+Cstray=1e-20;
+Rdot=5e4;
+C=0.8e-12;
+
+sens=sensitivity(w,0.9e-12,L,Rdot,'Cstray',Cstray,'Rohmic',Rohmic);
+sens=sens/max(sens(:));
+
+f=figure;
+a=axes;
+imagesc(a,wax/2/pi/1e6,Lax*1e9,sens); 
+xlabel('f (MHz)','FontSize',14);
+ylabel('L (nH)','FontSize',14);
+set(gca,'YDir','normal');
+c=colorbar;
+ylabel(c,'sensitivity (a.u.)')
+set(a,'FontSize',14);
+
+%%
+
 wax=linspace(100e6,300*1e6*2*pi,1001);
 Rohmicax=linspace(0,10e3,1001);
 Cstrayax=linspace(0.1e-12,1e-12,1001);
