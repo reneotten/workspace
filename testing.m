@@ -164,3 +164,34 @@ colorbar;
 plot(Lax(y),Cax(x),'r.');
 hold off
 
+%%
+Rsax=linspace(0,5e4,1000);
+wax=linspace(0,400e6,1000);
+
+figure;
+plot(wax,reflection(wax*2*pi,5e4,0,1e-21));
+
+%%
+figure;
+hold on
+for Rohmic=0:1000:10000
+phi=angle(reflection(226e6*2*pi,Rsax,Rohmic,1e-21));
+r=abs(reflection(226e6*2*pi,Rsax,Rohmic,1e-21));
+%r=r+r.*-2.*(phi<pi/2);
+plot(Rsax,r);
+end
+legend
+hold off
+
+%%
+Rsax=linspace(0,5e4,1000);
+[w,Rs]=meshgrid(wax,Rsax);
+
+
+for Cstray=1e-21:1e-13:1e-12
+figure;
+y=abs(reflection(w*2*pi,Rs,0,Cstray));
+%plot(Rsax,y);
+imagesc(wax,Rsax,y)
+end
+hold off
