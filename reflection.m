@@ -2,8 +2,8 @@ function [ Rcorr ] = reflection( w,R_s, Rohmic, Cs, varargin)
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
 defaultArgs = struct(...
-	'C',        0.9*1e-12, ...
-    'L',           820*1e-9);
+	'C',        0.8*1e-12, ...
+    'L',           620*1e-9);
     
 args = util.parse_varargin(varargin, defaultArgs);
 
