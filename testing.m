@@ -1,14 +1,14 @@
 %% standart, no ohmic, no stray dot
 wax=linspace(100e6*2*pi,300*1e6*2*pi,1001);
-Lax=linspace(400e-9,900e-9,101);
+Lax=linspace(400,900,101);
 [w,L]=meshgrid(wax,Lax);
 Rohmic=0;
 Cstray=1e-20;
 Rdot=5e4;
-C=0.8e-12;
+C=0.94;
 
 sens=sensitivity(w,0.9e-12,L,Rdot,'Cstray',Cstray,'Rohmic',Rohmic);
-sens=sens/max(sens(:));
+
 
 f=figure;
 a=axes;
@@ -30,8 +30,8 @@ Cstrayax=linspace(0.1e-12,1e-12,1001);
 
 Vs=0.1;
 
-Vd1=calcVd(Vs,w,5e4+1,Rohmic,1e-20,'L',600e-9);
-Vd2=calcVd(Vs,w,5e4+1,0,Cstray,'L',600e-9);
+Vd1=calcVd(Vs,w,5e4+1,Rohmic,1e-20,'L',600);
+Vd2=calcVd(Vs,w,5e4+1,0,Cstray,'L',600);
 
 dRcorr=(reflection(w,5e4+1,Rohmic,1e-20)-reflection(w,5e4-1,Rohmic,1e-20))/2; % numerical diff dRs
 dRcorr2=(reflection(w,5e4+1,0,Cstray)-reflection(w,5e4-1,0,Cstray))/2;
@@ -71,15 +71,17 @@ colorbar;
 
 wax=linspace(0,1000*1e6*2*pi,1001);
 Rohmicax=linspace(0,10e3,101);
-Cstrayax=linspace(0.1e-12,1e-12,101);
-Cax=linspace(0,1e-12,101);
-Lax=linspace(400e-9,900e-9,101);
+Cstrayax=linspace(0.1,1,101);
+Cax=linspace(0,1,101);
+Lax=linspace(400,900,101);
 
 %[~,Rohmic]=meshgrid(wax,Rohmicax);
 %%
 [w,Cstray,Rohmic]=meshgrid(wax,Cstrayax,Rohmicax);
 
 sens=sensitivity(w,0.9e-12,820e-9,5e4,'Cstray',Cstray,'Rohmic',Rohmic);
+
+
 
 
 %figure,imagesc(reshape(sens(1,:,:),101,101));
@@ -165,18 +167,29 @@ plot(Lax(y),Cax(x),'r.');
 hold off
 
 %%
-Rsax=linspace(0,5e4,1000);
+Rsax=linspace(0,8e6,1000);
 wax=linspace(0,400e6,1000);
 
 figure;
-plot(wax,reflection(wax*2*pi,5e4,0,1e-21));
+plot(wax,reflection(wax*2*pi,5e4,0,1e-10));
 
 %%
 figure;
 hold on
 for Rohmic=0:1000:10000
-phi=angle(reflection(226e6*2*pi,Rsax,Rohmic,1e-21));
+phi=angle(reflection(226e6*2*pi,Rsax,Rohmic,1e-10));
 r=abs(reflection(226e6*2*pi,Rsax,Rohmic,1e-21));
+%r=r+r.*-2.*(phi<pi/2);
+plot(Rsax,r);
+end
+legend
+hold off
+
+%%
+figure;
+hold on
+for Rohmic=300
+r=0.3*abs(reflection(181e6*2*pi,Rsax,Rohmic,1e-21,'L',820,'C',0.9429));
 %r=r+r.*-2.*(phi<pi/2);
 plot(Rsax,r);
 end

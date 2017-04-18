@@ -2,8 +2,8 @@ function [ S ] = sensitivity( w,C,L,Rs,varargin )
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 defaultArgs = struct(...
-	'Cstray',        1e-25, ...
-    'Rohmic',        500);
+	'Cstray',        1e-10, ...
+    'Rohmic',        0);
     
 args = util.parse_varargin(varargin, defaultArgs);
 

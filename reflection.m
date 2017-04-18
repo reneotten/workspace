@@ -2,15 +2,15 @@ function [ Rcorr ] = reflection( w,R_s, Rohmic, Cs, varargin)
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
 defaultArgs = struct(...
-	'C',        0.8*1e-12, ...
-    'L',           620*1e-9);
+	'C',        0.9429, ...  % in pF
+    'L',           820);  % in nH
     
 args = util.parse_varargin(varargin, defaultArgs);
 
-C=args.C;
-L=args.L;
+C=args.C*1e-12;
+L=args.L*1e-9;
 %R_s=50*1e3;
-C2=Cs;
+C2=Cs*1e-12;
 Z0=50;
 
 Z_c=1./(1i.*w.*C);
