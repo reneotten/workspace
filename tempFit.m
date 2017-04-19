@@ -23,6 +23,6 @@ hold on
 errorbar(xData,yData,dV0std,'o');
 % Label axes
 xlabel('T (mK)')
-ylabel ('dV (V)')
+ylabel ('dV (mV)')
 grid on
 set(gca,'FontSize',20);

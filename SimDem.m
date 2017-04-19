@@ -3,6 +3,7 @@ Rohmicax=linspace(0,10e3,101);
 Cstrayax=linspace(0.1,1,101);
 Cax=linspace(0,1,101);
 Lax=linspace(400,900,101);
+Rsax=linspace(0,10e4,101);
 
 %%
 [w,L]=meshgrid(wax,Lax);
@@ -15,7 +16,7 @@ xlabel('f (MHz)')
 ylabel('L (nH)')
 
 c=colorbar;
-ylabel(c,'\Gamma')
+ylabel(c,'|\Gamma|')
 
 %%
 [w,C]=meshgrid(wax,Cax);
@@ -46,6 +47,20 @@ ylabel('L (nH)')
 
 c=colorbar;
 ylabel(c,'d\Gamma/dR_S (1/\Omega)')
+%%
+[w,Rs]=meshgrid(wax,Rsax);
+
+z=sensitivity(w,0.9429,820,Rs,'Cstray',0.1,'Rohmic',300) ;
+figure,imagesc(wax./2./pi/1e6,Rsax,z);
+colorbar;
+
+set(gca,'FontSize',20);
+xlabel('f (MHz)')
+ylabel('Rs (\Omega)')
+
+c=colorbar;
+ylabel(c,'d\Gamma/dR_S (1/\Omega)')
+
 %%
 
 z2=calcVd(1, w,5e4, 0, 1e-10, 'L',L,'C',0.9429);

@@ -10,8 +10,21 @@ C=1/(w^2*L)  % F
 
 x=linspace(300,700,1000);
 y=sensitivity(f1*2*pi,0.9429,x,5e4,'Rohmic',Rohmic);
+yu=sensitivity(f1*2*pi,0.9429+.09429/2,x,5e4,'Rohmic',Rohmic);
+yd=sensitivity(f1*2*pi,0.9429-.09429/2,x,5e4,'Rohmic',Rohmic);
 y1=sensitivity(f2*2*pi,0.9429,x,5e4,'Rohmic',Rohmic);
-figure,plot(x,y,x,y1);
+y1u=sensitivity(f2*2*pi,0.9429+.09429/2,x,5e4,'Rohmic',Rohmic);
+y1d=sensitivity(f2*2*pi,0.9429-.09429/2,x,5e4,'Rohmic',Rohmic);
+
+figure,plot(x,y,'b',x,y1,'r');
+[~,index]=max(yu);
+vline(x(index),'b--');
+[~,index]=max(yd);
+vline(x(index),'b--');
+[~,index]=max(y1u);
+vline(x(index),'r--');
+[~,index]=max(y1d);
+vline(x(index),'r--');
 
 [msens,index]=max(y);
 L1=x(index);
