@@ -15,6 +15,7 @@ plot(x1,y1,x2,y2);
 box on
 %%
 % create smaller axes in top right, and plot on it
+
 axes('Position',[.15 .65 .25 .25])
 box on
 

@@ -25,13 +25,13 @@ a = struct( ...
 % end
 hold on;
 axis equal
-highlight_names={'34','38','35','36','39','40','30'};
+highlight_names={};
 highlight=zeros(size(highlight_names));
 for ii=1:numel(highlight)
     highlight(ii)=find(strcmp(names,highlight_names{ii}));
 end
 
-ohighlight_names={'31','7'};
+ohighlight_names={'7'};
 ohighlight=zeros(size(ohighlight_names));
 for ii=1:numel(ohighlight)
     ohighlight(ii)=find(strcmp(onames,ohighlight_names{ii}));

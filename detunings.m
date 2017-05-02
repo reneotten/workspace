@@ -32,8 +32,8 @@ defaultArgs = struct(...
     'eps_0',        util.const.eps_0 ...
 	);
 
-[E,phi,dU]=dot_tune.capacitive_gate_model(defaultArgs);
-figure,imagesc(dU); % add axis here
+[E,info]=dot_tune.capacitive_gate_model(defaultArgs);
+figure,imagesc(info.dU); % add axis here
 hold on;
 colorbar;
 set(gca,'Ydir','normal');
