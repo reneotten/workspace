@@ -1,5 +1,7 @@
-L=820e-9; % H
-f=181e6; % Hz
+% L=820e-9; % H
+L=470e-9
+% f=181e6; % Hz
+f=233e6
 w=2*pi*f; % 1/s
 f1=220e6; % Hz
 f2=240e6; % Hz
@@ -8,6 +10,8 @@ Rohmic=150; % Ohm
 C=1/(w^2*L)*1e12  % F
 % C=0.82 pF
 
+
+%%
 x=linspace(300,700,1000);
 y=sensitivity(f1*2*pi,C,x,5e4,'Rohmic',Rohmic);
 yu=sensitivity(f1*2*pi,C+C/20,x,5e4,'Rohmic',Rohmic);

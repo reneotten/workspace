@@ -3,7 +3,7 @@ function [ Vd ] = calcVd(Vs, w,Rs, Rohmic, Cstray, varargin)
 %   Detailed explanation goes here
 defaultArgs = struct(...
 	'C',        0.9, ...
-    'L',           820);
+    'L',           820.);
     
 args = util.parse_varargin(varargin, defaultArgs);
 
