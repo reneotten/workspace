@@ -1,12 +1,11 @@
 %% Load and Process VNA Traces
-filenames=cell2mat(util.glob(osPath('Otten/master/PCB Testing/data/working_seinsing_dots/run2_08/*.csv')));
+filenames=cell2mat(util.glob(osPath('Otten/master/PCB Testing/data/working_seinsing_dots/run2_08/*.CSV'),'-ignorecase'));
 
 V=str2num(filenames(:,end-7:end-4))';
 
 Vint=-V*1e-4;
 mins=zeros(size(Vint));
-
-
+z=zeros(numel(V),1001);
 for k=1:numel(V)
 
 A=util.osDepLoad(['Otten/master/PCB Testing/data/working_seinsing_dots/run2_08/' num2str(V(k)) '.CSV'],'operation','importdata');
@@ -14,7 +13,7 @@ A=util.osDepLoad(['Otten/master/PCB Testing/data/working_seinsing_dots/run2_08/'
 x=A.data(:,1)*1e-6;
 y=A.data(:,2);
 y2=10.^(y./20);
-
+z(k,:)=y2;
 mins(k)=min(y2);
 
 end
@@ -51,12 +50,12 @@ xlabel('R_S (\Omega)')
 ylabel('\Gamma')
 
 
-%%
+
 %% Try fit_suite fit
 
 % Define function externally
 
-%% Prepare Fit Parameters
+% Prepare Fit Parameters
 % All of the fit parameters are collected in a struct that is passed to
 % fit_suite.start_fit along with the data. fit_suite.start_fit tries to provide sensible
 % defaults for all of the parameters.
@@ -112,3 +111,9 @@ resArgs.y=linspace(args.paramsStart.y(1),args.paramsStart.y(end),1001);
 % figure, imagesc(resArgs.x,resArgs.y,fit_suite_reflection(result.runs(1).params))
 figure, imagesc(resArgs.x,resArgs.y/1000,fit_suite_reflection(resArgs));
 
+xlabel('Frequency (MHz)')
+ylabel('Sensing Dot Resistance (k\Omega)')
+
+c=colorbar;
+ylabel(c,'\Gamma')
+set(gca,'FontSize',18);

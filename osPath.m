@@ -2,7 +2,7 @@ function path = osPath( filePath ,varargin)
 
 defaultArgs = struct(...
     'serverName',       'Janeway',...
-    'serverDir',        'User AG Bluhm');
+    'serverDir',        'User Ag Bluhm');
 
 args = util.parse_varargin(varargin, defaultArgs);
 serverName=args.serverName;
