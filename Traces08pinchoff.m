@@ -1,10 +1,7 @@
 %% Load and Process VNA Traces
-path='Z:\master\PCB Testing\data\working_seinsing_dots\run2_08';
-pathold=pwd;
-cd(path);
-filenames=ls;
-cd(pathold);
-V=str2num(filenames(3:end,1:4))';
+filenames=cell2mat(util.glob(osPath('Otten/master/PCB Testing/data/working_seinsing_dots/run2_08/*.csv')));
+
+V=str2num(filenames(:,end-7:end-4))';
 
 Vint=-V*1e-4;
 mins=zeros(size(Vint));
