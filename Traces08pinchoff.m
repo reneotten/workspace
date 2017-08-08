@@ -66,7 +66,7 @@ ylabel('\Gamma')
 args.paramsStart.a = 0.6; 
 args.paramsStart.L= 470;
 args.paramsStart.C = 0.97; 
-args.paramsStart.Rohmic = 0;
+args.paramsStart.Rohmic = 500;
 args.paramsStart.x = x;
 args.paramsStart.y = R;
 
@@ -117,3 +117,37 @@ ylabel('Sensing Dot Resistance (k\Omega)')
 c=colorbar;
 ylabel(c,'\Gamma')
 set(gca,'FontSize',18);
+savefig(osPath('Otten/master/talk/figures/fit.fig'))
+print(osPath('Otten/master/talk/figures/fit.emf'),'-dmeta')
+
+
+resArgs=result.runs(1).params;
+resArgs.x=args.paramsStart.x;
+resArgs.y=linspace(args.paramsStart.y(1),args.paramsStart.y(end),1001);
+% figure, imagesc(resArgs.x,resArgs.y,fit_suite_reflection(result.runs(1).params))
+figure, imagesc(resArgs.x,resArgs.y/1000,z);
+
+xlabel('Frequency (MHz)')
+ylabel('Sensing Dot Resistance (k\Omega)')
+
+c=colorbar;
+ylabel(c,'\Gamma')
+set(gca,'FontSize',18);
+savefig(osPath('Otten/master/talk/figures/meas.fig'))
+print(osPath('Otten/master/talk/figures/meas.emf'),'-dmeta')
+
+resArgs=result.runs(1).params;
+resArgs.x=args.paramsStart.x;
+resArgs.y=linspace(args.paramsStart.y(1),args.paramsStart.y(end),1001);
+% figure, imagesc(resArgs.x,resArgs.y,fit_suite_reflection(result.runs(1).params))
+resArgs.y=R;
+figure, imagesc(resArgs.x,resArgs.y/1000,fit_suite_reflection(resArgs)-z);
+
+xlabel('Frequency (MHz)')
+ylabel('Sensing Dot Resistance (k\Omega)')
+
+c=colorbar;
+ylabel(c,'\Gamma')
+set(gca,'FontSize',18);
+savefig(osPath('Otten/master/talk/figures/res.fig'))
+print(osPath('Otten/master/talk/figures/fit.emf'),'-dmeta')
